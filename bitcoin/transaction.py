@@ -275,7 +275,10 @@ def serialize_script_unit(unit):
         if unit < 16:
             return from_int_to_byte(unit + 80)
         else:
-            return bytes([unit])
+            if is_python2:
+              return from_int_to_byte(unit)
+            else:
+              return bytes([unit])
     elif unit is None:
         return b'\x00'
     else:
